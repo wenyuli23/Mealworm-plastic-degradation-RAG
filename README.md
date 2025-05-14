@@ -1,4 +1,4 @@
-# Mealworm-RAG
+# Leveraging Knowledge Graph–Based Retrieval Augmented Generation to Accelerate Insights on Mealworm Larvae and Plastic Degradation
 
 A repository for exploring and comparing different Retrieval-Augmented Generation (RAG) approaches for scientific literature about mealworms and related organisms. Paper: *_Leveraging Knowledge Graph–Based Retrieval Augmented Generation to Accelerate Insights on Mealworm Larvae and Plastic Degradation._*
 
