@@ -1,0 +1,447 @@
+
+-Goal-
+Given a text document that is potentially relevant to this activity, first identify all entities needed from the text in order to capture the information and ideas in the text.
+Next, report all relationships among the identified entities.
+
+-Steps-
+1. Identify all entities. For each identified entity, extract the following information:
+- entity_name: Name of the entity, capitalized
+- entity_type: Suggest several labels or categories for the entity. The categories should not be specific, but should be as general as possible.
+- entity_description: Comprehensive description of the entity's attributes and activities
+Format each entity as ("entity"{tuple_delimiter}<entity_name>{tuple_delimiter}<entity_type>{tuple_delimiter}<entity_description>)
+
+2. From the entities identified in step 1, identify all pairs of (source_entity, target_entity) that are *clearly related* to each other.
+For each pair of related entities, extract the following information:
+- source_entity: name of the source entity, as identified in step 1
+- target_entity: name of the target entity, as identified in step 1
+- relationship_description: explanation as to why you think the source entity and the target entity are related to each other
+- relationship_strength: a numeric score indicating strength of the relationship between the source entity and target entity
+Format each relationship as ("relationship"{tuple_delimiter}<source_entity>{tuple_delimiter}<target_entity>{tuple_delimiter}<relationship_description>{tuple_delimiter}<relationship_strength>)
+
+3. Return output in The primary language of the provided text is **English**. as a single list of all the entities and relationships identified in steps 1 and 2. Use **{record_delimiter}** as the list delimiter.
+
+4. If you have to translate into The primary language of the provided text is **English**., just translate the descriptions, nothing else!
+
+5. When finished, output {completion_delimiter}.
+
+-Examples-
+######################
+
+Example 1:
+
+text:
+ Achroia grisella (Kundungal et al., 2019) and Spodoptera frugiperda (Zhang et al., 2022b).
+
+Both T. molitor and T. obscurus larvae are not only two widely investigated plastic-degrading insect larvae (Wu and Cridde, 2021; Yang et al., 2023b), but also are commercially reared for animal feed and insect protein, typically being fed with wheat bran (WB) (Ding et al., 2023; Peng et al., 2019; Yang et al., 2021c). Our previous work has shown that both species can rapidly biodegrade LDPE, LLDPE and HDPE (Yang et al., 2021c, 2022). Studies of LDPE biodegradation by these two species have demonstrated that under nutrient-poor conditions, coordination of gut microbiome carbon and nitrogen metabolism is necessary for energy and nutrition acquisition during plastic degradation (Ding et al., 2023; Yang et al., 2023a). Although T. molitor and T. obscurus have distinct behaviours (Peng et al., 2019; Robinson, 2005), both species can adapt to LDPE diets by altering their gut microbiota or microbiome structure (Dai et al., 2022; Welti et al., 2020) to ensure their capacity to survive using PE as their sole source of both energy and carbon within a 3–5 week period (Lou et al., 2020, 2021; Przemieniecki et al., 2020; Woo et al., 2020; Yang et al., 2021a, 2021b, 2021c, 2022). Previous research on reported that a decrease in gut microbial community similarity occurs after larvae switch to a plastic-based diet, such as LDPE, PS, and etc. (Brandon et al., 2018; Peng et al., 2019, 2021; Przemieniecki et al., 2020; Ruiz Barrionuevo et al., 2022a, 2022b; Yang et al., 2022, Yang et al., 2023a). However, the majority of reports on microbiomes associated with PE degradation by insect larvae have focused on LDPE (Brandon et al., 2018; Peng et al., 2019; Yang et al., 2021c).
+
+During plastics biodegradation, Tenebrio larvae are directly exposed to PE microplastics (MPs), through biofragmentation of ingested plastic foams or particles into fragments by chewing, grinding, and digestion in the gut. Studies on other macroinvertebrates have shown that long-term exposure to MPs can cause biological toxicity, causing mechanical damage and the onset of inflammatory responses in Corbicula fluminea, mice and zebrafish (Li et al., 2021).The gut is a vital line of defence against exogenous substances, as well as being an essential organ for immunity, digestion and absorption in insects. When the gut microbiota becomes imbalanced or are mechanically stimulated, various inflammatory and immune cells are activated, leading to intestinal inflammation (Baeckhed et al., 2005; Li et al., 2021; Suzuki et al., 2004). However, the extent to which gut health reflects the effects of PE-MPs with different PCPs on Tenebrio larvae during plastic degradation, has not been clearly elucidated. Our previous studies found that different metabolic intermediates were generated when T. molitor and T. obscurus larvae ingested and digested HDPE, LLDPE and LDPE. The degradation intermediates formed may also affect on T. obscurus and T. molitor larvae.
+
+For more than a decade, PE has been the top plastic in the world, and it is a promising sustainable technology and green strategy to utilize the mealworms, which are macroinvertebrates with the ability to degrade plastics, in the biodegradation of PE. To the best of our knowledge, no studies have comprehensively addressed the comparison of the impacts of PE type (LDPE, LLDPE and HDPE) on larval physiology, gut microbiome and oxidative stress (at a physiological or biochemical level). In addition, in the long run, the larvae degrade microplastics and then excrete plastic into the ecosystem, and it is important to investigate whether their frass contain toxic substances that are harmful to aquatic and terrestrial organisms in
+
+2. Materials and methods
+
+2.1. Sources of Tenebrio larvae
+
+T. molitor larvae were procured from the Dafa Birds and Flower Market in Harbin, China while T. obscurus larvae were procured from a Breeding Farm in Zaozhuang, Shandong, China. The dealers claimed that the larvae were fed a diet without antibiotics.
+
+2.2. PE materials
+
+The high-purity PE powders (size: <300 μm) of LDPE, HDPE, and LLDPE were purchased from Shanghai Plastics Trading Co., Ltd., Shanghai, China. The molecular weights are Mn 42.2, 93.2, and 59.5 kDa; Mw 110.5, 222.5, and 182 kDa; and size averaged molecular weight (Mz) 216.1, 456.5, and 408.8 kDa for LDPE, LLDPE, and HDPE, respectively (Table S1). No catalysts or additives were present according to manufacture (Table S2). Wheat bran (WB) was purchase from an agricultural market in Harbin, China. All analytical grade chemicals used for analyses were analytical degrade from Sin
+------------------------
+output:
+("entity"{tuple_delimiter}ACHROIA GRISELLA{tuple_delimiter}SPECIES{tuple_delimiter}Achroia grisella is a species of moth investigated for its role in biodegradation of plastics)
+{record_delimiter}
+("entity"{tuple_delimiter}SPODOPTERA FRUGIPERDA{tuple_delimiter}SPECIES{tuple_delimiter}Spodoptera frugiperda is a species of moth studied for its ecological impact and potential in biodegradation)
+{record_delimiter}
+("entity"{tuple_delimiter}TENEBRIO MOLITOR{tuple_delimiter}SPECIES{tuple_delimiter}Tenebrio molitor is a plastic-degrading insect larva commonly known as the mealworm, reared for animal feed and capable of degrading various plastics)
+{record_delimiter}
+("entity"{tuple_delimiter}TENEBRIO OBSCURUS{tuple_delimiter}SPECIES{tuple_delimiter}Tenebrio obscurus is another species of plastic-degrading insect larva, similar to T. molitor in its capabilities and uses)
+{record_delimiter}
+("entity"{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}PROCESS{tuple_delimiter}Plastic degradation refers to the process through which organisms break down plastics, often involving the gut microbiome for energy and nutrition)
+{record_delimiter}
+("entity"{tuple_delimiter}LDPE{tuple_delimiter}MATERIAL{tuple_delimiter}Low-Density Polyethylene (LDPE) is a type of plastic that can be degraded by certain insect larvae)
+{record_delimiter}
+("entity"{tuple_delimiter}LLDPE{tuple_delimiter}MATERIAL{tuple_delimiter}Linear Low-Density Polyethylene (LLDPE) is a plastic type that is also subject to degradation by insect larvae)
+{record_delimiter}
+("entity"{tuple_delimiter}HDPE{tuple_delimiter}MATERIAL{tuple_delimiter}High-Density Polyethylene (HDPE) is another plastic that is degradable by certain insect larvae)
+{record_delimiter}
+("entity"{tuple_delimiter}GUT MICROBIOME{tuple_delimiter}BIOLOGICAL SYSTEM{tuple_delimiter}The gut microbiome is a community of microorganisms in the digestive system of insects that plays a critical role in digestion and degradation processes)
+{record_delimiter}
+("entity"{tuple_delimiter}MICROPLASTICS{tuple_delimiter}MATERIAL{tuple_delimiter}Microplastics are small plastic particles that can impact the health of organisms when ingested)
+{record_delimiter}
+("entity"{tuple_delimiter}FRASS{tuple_delimiter}MATERIAL{tuple_delimiter}Frass is the excrement of insects, which may contain remnants of degraded plastics and could impact the ecosystem)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO MOLITOR{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}Tenebrio molitor is involved in the plastic degradation process, utilizing its gut microbiome to break down plastics like LDPE, LLDPE, and HDPE{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO OBSCURUS{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}Tenebrio obscurus participates in the plastic degradation process similar to T. molitor, aiding in breaking down various plastics{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}LDPE{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}LDPE is a type of plastic that can be degraded by insect larvae, contributing to the overall plastic degradation process{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}LLDPE{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}LLDPE is also a plastic type involved in the degradation process facilitated by insect larvae{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}HDPE{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}HDPE is another plastic that can be broken down by certain insect larvae during the degradation process{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO MOLITOR{tuple_delimiter}GUT MICROBIOME{tuple_delimiter}The gut microbiome of Tenebrio molitor plays a crucial role in energy and nutrition acquisition during the degradation of plastics{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO OBSCURUS{tuple_delimiter}GUT MICROBIOME{tuple_delimiter}The gut microbiome of Tenebrio obscurus is essential for its adaptation to plastic diets and degradation processes{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO MOLITOR{tuple_delimiter}MICROPLASTICS{tuple_delimiter}Tenebrio molitor larvae are exposed to microplastics during the plastic degradation process, which may affect their health{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO OBSCURUS{tuple_delimiter}MICROPLASTICS{tuple_delimiter}Tenebrio obscurus larvae are also exposed to microplastics, which can lead to potential health issues{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO MOLITOR{tuple_delimiter}FRASS{tuple_delimiter}The frass produced by Tenebrio molitor may contain remnants of plastics and potentially harmful substances affecting the ecosystem{tuple_delimiter}4)
+{record_delimiter}
+("relationship"{tuple_delimiter}TENEBRIO OBSCURUS{tuple_delimiter}FRASS{tuple_delimiter}The frass of Tenebrio obscurus may also have similar ecological implications as that of T. molitor's frass{tuple_delimiter}4)
+{completion_delimiter}
+#############################
+
+
+Example 2:
+
+text:
+ \({ }^{\circledR}\) solution at pH 3.5 in a magnetic stirrer for 10-15 min. The polystyrene was then dried in absorbent paper and incubated overnight at \(59{ }^{\circ} \mathrm{C}\) to remove all remaining humidity and carefully observed under a stereomicroscope to confirm the absence of organic materials (e.g. exuviae). Undegraded substrate, ideally composed of not eaten PS debris and fecal pellets, was sieved to separate the two components. The resulting PS fraction was weighted and added to the above figure.
+
+\subsection*{2.3. DNA extraction of gut microorganisms, markers amplification and sequencing}
+
+At the end of the experiment, total DNA was extracted from A. diaperinus guts to characterize its microbial communities. Lesser mealworm larvae were collected and the whole intestines dissected under a Leica Wild M3C stereomicroscope using Petri dishes filled with sterilized paraffin as support. Total DNA was extracted using the QIAamp PowerFecal \({ }^{\circledR}\) DNA Kit according to the manufacturer's protocol. Extractions were made in triplicates from each group, i.e. three individual larvae were used to have triplicate observations from the PS group and three from the control group. DNA extractions were used for a metabarcoding analysis of the fungal and bacterial communities using the ITS1 and the 16S v3-v4 region as molecular marker, respectively (details in Protocol S1; Supplementary material).
+
+\subsection*{2.4. Data analysis}
+
+Raw sequences were demultiplexed based on their indices and primer sequences were removed. Quality trimming/filtering was performed in trimmomatic v.0.39 (Bolger et al., 2014) and then processed using the Quantitative Insights Into Microbial Ecology v.2 software (QIIME2 - v.2019.7) (Bolyen et al., 2019) as described in Protocol S2 (Supplementary material).
+
+Diversity analyses were performed in QIIME2 and data for both markers were rarefied at the minimum sampling depth observed among samples prior to analyses. Good's coverage, Simpson and Shannon diversity indices ( \(\alpha\) diversity), were calculated for both markers, using the Kruskal-Wallis test to compare values across groups. Bray-Curtis Principal Coordinates Analysis (PCoA) was performed on both datasets. The phylogeny-based Unifrac distances (weighted and unweighted) PCoA were applied to the bacteria dataset only ( \(\beta\) diversity). QIME2 workflows are provided as Protocol S3 (bacteria) and Protocol S4 (fungi) (Supplementary material).
+
+Differential abundance of OTUs was evaluated for both datasets (on the original non rarefied datasets) using the Phyloseq and DESeq2 packages in R v.3.6.1 (R Core Team 2018, http://www.R-project.org/) (Love et al., 2014; McMurdie and Holmes, 2013), and OTUs with an associated adjusted \(p\)-value (padj) \(<0.05\) were retained. The custom R script for this procedure is supplied as Protocol S5 of Supplementary material.
+
+\section*{3. Results}
+
+\subsection*{3.1. A. diaperinus survival rate and polystyrene weight loss}
+
+Alphitobius diaperinus underwent a reduction of 77\% and 89\% of total weight in the CT and PS group, respectively. Reduction was more severe in the PS compared to the CT group (1.2×).
+
+The weight of the polystyrene decreased during the experiment from 20 g (time zero) to 16 g (day 30) \((s=2.83)\). Henceforth, 4 g (20\%) of polystyrene was presumably degraded during 30 days of incubation.
+
+\subsection*{3.2. Diversity of bacteria}
+
+
+
+The taxa bar plot showed the presence of six predominant bacterial phyla, mostly with different relative frequencies: Proteobacteria (76% and 57% in PS and CT, respectively), Bacteroidetes (3% and 26%), Firmicutes (13% and 8%), Actinobacteria (4% and 8%), Fusobacteria (3% and \(<1 \%)\) and an unassigned phylum (<1% in both groups) (Fig. 1a).
+
+Clustering at the level of classes identified eight predominant entities, often represented with different relative frequencies: Gammaproteobacteria (76% and 57%), Bacteroidia (3% and 25%), Bacilli (13% and 7%), Actinobacteria (4% and 8%), Fusobacteria (3% and 1%), Alphaproteobacteria (<1% and 1%), Erysipelotrichia (<1% both) and an unassigned class (<1% both) (Fig. 1b).
+
+Shared OTUs count indicated that \(\sim 30 \%\) OTUs were shared among treatment and control groups, \(\sim 50 \%\) were observed in control only and \(\sim 20 \%\) in treatment only (Fig. 2).
+
+The Good's coverage index, an estimate of the representativeness of the data, produced values higher than 0.99 for both PS and CT groups, thus indicating that the sequencing depth could be considered appropriate to provide an adequate estimation of the bacterial diversity in the samples. The Shannon and Simpson indices (Table 1) produced high values overall, with the only exception of one PS sample (library PS3). Based on the Simpson
+------------------------
+output:
+("entity"{tuple_delimiter}ALPHITOBIUS DIAPERINUS{tuple_delimiter}ORGANISM{tuple_delimiter}Alphitobius diaperinus is a species of lesser mealworm whose gut microorganisms were studied for diversity and degradation of polystyrene)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYSTYRENE{tuple_delimiter}COMPOUND{tuple_delimiter}Polystyrene is a plastic compound used in the experiment, which was degraded by Alphitobius diaperinus)
+{record_delimiter}
+("entity"{tuple_delimiter}DNA EXTRACTION{tuple_delimiter}PROCEDURE{tuple_delimiter}DNA extraction involves obtaining DNA from the gut microorganisms of Alphitobius diaperinus for microbial community analysis)
+{record_delimiter}
+("entity"{tuple_delimiter}METABARCODING ANALYSIS{tuple_delimiter}PROCEDURE{tuple_delimiter}Metabarcoding analysis is a method used to characterize microbial communities through sequencing specific DNA regions)
+{record_delimiter}
+("entity"{tuple_delimiter}QIIME2{tuple_delimiter}SOFTWARE{tuple_delimiter}QIIME2 is software used for analyzing and processing microbial ecology data)
+{record_delimiter}
+("entity"{tuple_delimiter}BRAY-CURTIS PCoA{tuple_delimiter}METHOD{tuple_delimiter}Bray-Curtis Principal Coordinates Analysis is a method for assessing the similarity of microbial communities based on abundance data)
+{record_delimiter}
+("entity"{tuple_delimiter}OTUs{tuple_delimiter}BIOLOGICAL ENTITY{tuple_delimiter}Operational Taxonomic Units (OTUs) are used to categorize microbial species based on DNA sequences in diversity analyses)
+{record_delimiter}
+("entity"{tuple_delimiter}SIMILARITY ANALYSIS{tuple_delimiter}PROCEDURE{tuple_delimiter}Similarity analysis involves comparing the diversity of microbial communities across different treatment and control groups)
+{record_delimiter}
+("relationship"{tuple_delimiter}ALPHITOBIUS DIAPERINUS{tuple_delimiter}POLYSTYRENE{tuple_delimiter}Alphitobius diaperinus is capable of degrading polystyrene during the experiment{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}ALPHITOBIUS DIAPERINUS{tuple_delimiter}DNA EXTRACTION{tuple_delimiter}DNA extraction was performed from the guts of Alphitobius diaperinus to study its microbial community{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}DNA EXTRACTION{tuple_delimiter}METABARCODING ANALYSIS{tuple_delimiter}DNA extraction is a precursor step to conducting metabarcoding analysis for microbial characterization{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}METABARCODING ANALYSIS{tuple_delimiter}QIIME2{tuple_delimiter}Metabarcoding analysis data was processed using QIIME2 software{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}QIIME2{tuple_delimiter}BRAY-CURTIS PCoA{tuple_delimiter}QIIME2 was used to perform Bray-Curtis Principal Coordinates Analysis on microbial community data{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}OTUs{tuple_delimiter}SIMILARITY ANALYSIS{tuple_delimiter}Similarity analysis evaluated the abundance and diversity of OTUs between treatment and control groups{tuple_delimiter}6)
+{completion_delimiter}
+#############################
+
+
+Example 3:
+
+text:
+) | 144.11±8.77a | 132.06±8.06b | 116.87±7.77b |
+| Number of eggs | 46.5±2.77a | 28.9±1.90c | 31.80±2.45d |
+
+(a, b, c) Mean values with different superscripts within the same row differ significantly (p<0.05)
+
+Regarding the low number of eggs produced by mealworms fed PS foam, it seems a logical consequence of the low rate of growth and development of larvae, pupae and imago itself. As reported by Young-Kyu Park and colleagues, it was revealed that fecundity of T. molitor was significantly affected by the pupal weight (Park et al., 2012) and might also related to the adult weight (Morales-Ramos et al., 2012).
+
+Another thing that is not less important revealed in this study is that XPS foam provides less productivity measures compared to EPS foam feeds. This may be related to the physical and chemical aspects differences between EPS foam and XPS. EPS foam known to have a higher rate of permeability, contains up to 15% recycled content, has never contained HFCs, CFCs, HCFCs, formaldehyde, or color dyes (ACH, 2013). HFCCs, as one example, was known to not only reduce body weight but also cause microscopic liver lesions in laboratory mammals (WHO, 2000). Formaldehyde is another chemical content in XPS foam that is allegedly responsible for low productivity in mealworms. Formaldehyde solution is known to be common strategy used to control microbial growth in many insect diets and effectively caused decrease in the microbial development (Roeder et al., 2010).
+
+Although PS foam feed proved unable to match the productivity effects of standard diets on the growth, development and reproduction of T. molitor beetle but the use of mealworms for the purpose of polystyrene waste biodegradation, especially when combined with other biodegradation techniques, is quite promising. There are many laboratory and field tests indicate that some soil microbes able to degrade PS foam to an adequate level. Pseudomonas aeruginosa, Bacillus subtilis, Staphylococcus aureus, Streptococcus pyogenes and Aspergillus niger are examples among soil inhabitants bacteria proven to decrease various types of plastic waste including PS foam (Asmita et al., 2015). Other soil microbes that are also worth considering to be combined with the use of mealworms in PS waste biodegradation are fungi. Rhizopus oryzae, Aspergillus terreus and Phanerochaete chrysosporium are examples of soil inhabitants fungi that were able to colonize polystyrene film surface for a quite period of time without any other carbon source (Atiq, 2011).
+
+\section*{Conclusion}
+
+The findings of this study show that PS foam does not have a lethal effect on the mealworms, but is clearly can not equate, moreover to surpass, the productivity effects of standard diets especially yeasts. It is inferred that the PS foam is not worthy feasible to be used as economical feeds in mealworms cultivation. Mealworms fed with PS foam feeds showed a low rate of growth and development of larvae, pupae and imago and make the imago produce a lower number of eggs. Between the two types of PS waste, XPS foam provides less productivity measures compared to EPS foam feeds. However, given that PS foam feeds can maintain the insects life and produce eggs, the use of mealworms in PS waste degradation is still worth considering.
+
+\section*{Acknowledgement}
+
+We would like to thank Deasy Vidya Carolina Manullang and Rahmawati who helped us to take care the stock mealworms.
+
+\section*{Funding Information}
+
+No necessary funding information.
+
+\section*{Author's Contributions}
+
+Nismah Nukmal: Designed the study, conduct data analysis and manuscript preparation.
+
+Suratman Umar: Carrying out experiments and data analyses. responsible bioassay and developing manuscript.
+
+Sheila Puspita Amanda: Responsible for collecting and preparing styrofoam feeds.
+
+Mohammad Kanedi: Responsible for editing and finishing manuscript.
+
+\section*{Ethics}
+
+This article is original and contains unpublished material. The corresponding author confirms that no ethical issues involved.
+
+\section*{References}
+
+ACH, 2013. EPS Vs. XPS apples-to-apples comparison of rigid foam insulation. ACH Foam Technologies.
+
+Asmita, K., T. Shubhamsingh and S.Tejashree, 2015. Isolation of plastic degrading micro-organisms from soil samples collected at various locations in Mumbai, India. Int. Res. J. Environ. Sci., 4: 77-85.
+
+
+Atiq, N., 2011. Biodegradability of synthetic plastics polystyrene and styrofoam by fungal isolates. PhD Thesis, Department of Microbiology, Quaid-i-Azam University, Islamabad.
+
+ATSDR, 1992. Agency For Toxic Substances and Disease Registry (ATSDR). Toxicological Profile For Styrene, U.S. Public Health Service, U.S. Department of Health And Human Services, Atlanta, GA.
+
+Becher, P.G., G. Flick, E. Rozpedowska, A. Schmidt and A. Hagman et al., 2012. Yeast, not fruit volatiles mediate Drosophila melanogaster attraction, oviposition and development. Funct. Ecol., 26: 822-828. DOI: 10.1111/j.1365
+------------------------
+output:
+("entity"{tuple_delimiter}T. MOLITOR{tuple_delimiter}ORGANISM{tuple_delimiter}T. molitor is a species of mealworm beetle whose growth and reproduction were studied in relation to different feed types.)
+{record_delimiter}
+("entity"{tuple_delimiter}PS FOAM{tuple_delimiter}MATERIAL{tuple_delimiter}PS foam is a type of plastic that was tested as a feed for mealworms, showing low productivity effects.)
+{record_delimiter}
+("entity"{tuple_delimiter}XPS FOAM{tuple_delimiter}MATERIAL{tuple_delimiter}XPS foam is another type of plastic feed tested, which was found to provide lower productivity measures compared to EPS foam.)
+{record_delimiter}
+("entity"{tuple_delimiter}EPS FOAM{tuple_delimiter}MATERIAL{tuple_delimiter}EPS foam is a type of plastic feed known for higher permeability and containing recycled content, leading to better productivity in mealworms.)
+{record_delimiter}
+("entity"{tuple_delimiter}PSEUDOMONAS AERUGINOSA{tuple_delimiter}ORGANISM{tuple_delimiter}Pseudomonas aeruginosa is a soil microbe that can degrade polystyrene foam.)
+{record_delimiter}
+("entity"{tuple_delimiter}BACILLUS SUBTILIS{tuple_delimiter}ORGANISM{tuple_delimiter}Bacillus subtilis is a soil bacterium known to decrease various types of plastic waste, including PS foam.)
+{record_delimiter}
+("entity"{tuple_delimiter}STAPHYLOCOCCUS AUREUS{tuple_delimiter}ORGANISM{tuple_delimiter}Staphylococcus aureus is a type of soil bacterium involved in the degradation of plastic waste.)
+{record_delimiter}
+("entity"{tuple_delimiter}STREPTOCOCCUS PYOGENES{tuple_delimiter}ORGANISM{tuple_delimiter}Streptococcus pyogenes is a soil bacterium that contributes to the degradation of polystyrene.)
+{record_delimiter}
+("entity"{tuple_delimiter}ASPERGILLUS NIGER{tuple_delimiter}ORGANISM{tuple_delimiter}Aspergillus niger is a soil fungus capable of degrading PS foam.)
+{record_delimiter}
+("entity"{tuple_delimiter}RHIZOPUS ORYZAE{tuple_delimiter}ORGANISM{tuple_delimiter}Rhizopus oryzae is a soil fungus that can colonize polystyrene and degrade it.)
+{record_delimiter}
+("entity"{tuple_delimiter}ASPERGILLUS TERREUS{tuple_delimiter}ORGANISM{tuple_delimiter}Aspergillus terreus is a soil fungus noted for its ability to degrade polystyrene.)
+{record_delimiter}
+("entity"{tuple_delimiter}PHANEROCHAETE CHRYSOSPORIUM{tuple_delimiter}ORGANISM{tuple_delimiter}Phanerochaete chrysosporium is a soil fungus that can colonize and degrade polystyrene.)
+{record_delimiter}
+("entity"{tuple_delimiter}DEASY VIDYA CAROLINA MANULLANG{tuple_delimiter}PERSON{tuple_delimiter}Deasy Vidya Carolina Manullang contributed to the care of the stock mealworms in the study.)
+{record_delimiter}
+("entity"{tuple_delimiter}RAHMAWATI{tuple_delimiter}PERSON{tuple_delimiter}Rahmawati assisted in taking care of the stock mealworms for the study.)
+{record_delimiter}
+("entity"{tuple_delimiter}NISMAH NUKMAL{tuple_delimiter}PERSON{tuple_delimiter}Nismah Nukmal designed the study and conducted data analysis and manuscript preparation.)
+{record_delimiter}
+("entity"{tuple_delimiter}SURATMAN UMAR{tuple_delimiter}PERSON{tuple_delimiter}Suratman Umar was responsible for carrying out experiments and data analyses in the study.)
+{record_delimiter}
+("entity"{tuple_delimiter}SHEILA PUSPITA AMANDA{tuple_delimiter}PERSON{tuple_delimiter}Sheila Puspita Amanda was responsible for collecting and preparing styrofoam feeds for the study.)
+{record_delimiter}
+("entity"{tuple_delimiter}MOHAMMAD KANEDI{tuple_delimiter}PERSON{tuple_delimiter}Mohammad Kanedi was responsible for editing and finishing the manuscript of the study.)
+{record_delimiter}
+("relationship"{tuple_delimiter}T. MOLITOR{tuple_delimiter}PS FOAM{tuple_delimiter}T. molitor showed low productivity when fed PS foam, impacting growth and egg production{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}T. MOLITOR{tuple_delimiter}XPS FOAM{tuple_delimiter}T. molitor fed XPS foam had lower productivity compared to those fed EPS foam{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}EPS FOAM{tuple_delimiter}T. MOLITOR{tuple_delimiter}EPS foam is associated with higher productivity in T. molitor compared to PS foam{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}PSEUDOMONAS AERUGINOSA{tuple_delimiter}PS FOAM{tuple_delimiter}Pseudomonas aeruginosa is a microbe capable of degrading PS foam, which may assist in its biodegradation{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}BACILLUS SUBTILIS{tuple_delimiter}PS FOAM{tuple_delimiter}Bacillus subtilis contributes to the degradation of PS foam, aiding in waste management{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}STAPHYLOCOCCUS AUREUS{tuple_delimiter}PS FOAM{tuple_delimiter}Staphylococcus aureus aids in the breakdown of PS foam waste in the environment{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}STREPTOCOCCUS PYOGENES{tuple_delimiter}PS FOAM{tuple_delimiter}Streptococcus pyogenes is involved in the degradation of PS foam, supporting biodegradation efforts{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}ASPERGILLUS NIGER{tuple_delimiter}PS FOAM{tuple_delimiter}Aspergillus niger helps degrade PS foam, which is crucial for waste reduction{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}RHIZOPUS ORYZAE{tuple_delimiter}PS FOAM{tuple_delimiter}Rhizopus oryzae is capable of colonizing and degrading PS foam, contributing to its biodegradation{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}ASPERGILLUS TERREUS{tuple_delimiter}PS FOAM{tuple_delimiter}Aspergillus terreus is a soil fungus that aids in degrading PS foam, assisting in waste management{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}PHANEROCHAETE CHRYSOSPORIUM{tuple_delimiter}PS FOAM{tuple_delimiter}Phanerochaete chrysosporium can degrade PS foam, which is significant for ecological cleanup{tuple_delimiter}5)
+{record_delimiter}
+("relationship"{tuple_delimiter}DEASY VIDYA CAROLINA MANULLANG{tuple_delimiter}T. MOLITOR{tuple_delimiter}Deasy Vidya Carolina Manullang contributed to the care of the mealworms used in the study{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}RAHMAWATI{tuple_delimiter}T. MOLITOR{tuple_delimiter}Rahmawati assisted in the care of the mealworms for the experiment{tuple_delimiter}3)
+{record_delimiter}
+("relationship"{tuple_delimiter}NISMAH NUKMAL{tuple_delimiter}SURATMAN UMAR{tuple_delimiter}Nismah Nukmal and Suratman Umar collaborated on data analysis and experimental procedures in the study{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}SHEILA PUSPITA AMANDA{tuple_delimiter}T. MOLITOR{tuple_delimiter}Sheila Puspita Amanda was responsible for preparing the feeds for T. molitor in the study{tuple_delimiter}4)
+{record_delimiter}
+("relationship"{tuple_delimiter}MOHAMMAD KANEDI{tuple_delimiter}NISMAH NUKMAL{tuple_delimiter}Mohammad Kanedi edited the manuscript prepared by Nismah Nukmal{tuple_delimiter}5)
+{completion_delimiter}
+#############################
+
+
+Example 4:
+
+text:
+ 0.6%, 90.7 ± 1.5%, 81.3 ± 1.5%, 96.3 ± 0.6%, and 72.0 ± 2.0% for the PE-fed, PS-fed, PVC-fed, bran-fed, and unfed mealworms, respectively, by the end of the experiment (Fig. S2 and Table S1). The results were consistent with the changes in the body weights of the mealworm groups over the period (Figs. 1b and 1c). These findings implied that ingesting microplastics as an exogenous food source could provide energy for the survival of mealworm larvae and sustain their growth, although this specialized energy source was not as efficient as the normal food (wheat bran). A plastic diet alone could cause nutrient exhaustion and a lack of trace elements required for the production of both digestive enzymes and transporters [31,38], leading to decreased nutrient uptake and, as a result, negative growth of the mealworms.
+
+Interestingly, the survival curves of the PE-fed and PS-fed mealworms over the period were not statistically different, while those were both significantly different from that of the PVC-fed mealworms (Fig. 1a). Similarly, a relatively lower body weight of mealworms was also found in the PVC-fed group compared with those fed with PE and PS microplastics after 24 days (Fig. 1c, Table S2 and S3). The degradation of
+
+
+PVC was partial, and the extent of PVC mineralization was comparatively limited during the insect-mediated biodegradation [13,26,64], which supplied less available energy and carbon sources. Toxic substances, e.g., chlorinated intermediates (up to 63%) and hydrogen chloride, were also produced during the PVC depolymerization process [26], which might impair the intestinal epithelium and damage the homeostasis of mealworms. The combined factors resulted in the poor survival status and physiological responses of the PVC-fed mealworms during the experiment (Fig. 1a-c and Table S1-3). Future studies on invertebrate-mediated plastic biodegradation should identify the impact of degradation intermediates and mineralization products on the invertebrate and degradation processes.
+
+\subsection*{3.2. Evidence of biodegradation of the microplastics}
+
+GPC analysis was applied to obtain evidence of polymer depolymerization and confirm the biodegradation of the ingested plastics by mealworms. The \(M_{w}, M_{n}\), and \(M_{z}\) of the ingested PS significantly decreased from \(180.7 \pm 5.1 \mathrm{kDa}, 74.6 \pm 3.3 \mathrm{kDa}\), and \(376.4 \pm 18.7 \mathrm{kDa}\) to \(131.3 \pm 6.0 \mathrm{kDa}\) (by \(27.34 \pm 3.32 \%)\), \(48.5 \pm 0.8 \mathrm{kDa}\) (by \(34.99 \pm 1.07 \%)\), and \(281.8 \pm 14.5 \mathrm{kDa}\) (by \(25.13 \pm 3.85 \%\) ) after mealworm digestion (Fig. 1d-i and Table 1), suggesting a typical broad depolymerization pattern as shown in previous studies [28,56,59]. The ingested PVC exhibited a similar depolymerization pattern as that of the ingested PS microplastics, i.e., the \(M_{w}, M_{n}\), and \(M_{z}\) were reduced by \(26.27 \pm 4.47 \%, 32.98 \pm 4.97 \%\), and \(21.10 \pm 3.47 \%\), respectively (Fig. 1g-i). On the other hand, the PDI of the recovered PS and PVC residue in frass (2.707 and 2.151) was both higher than that of the original PS and PVC microplastics (2.422 and 1.955) (Table 1). The increase in the PDI value suggested the random internal scission (or endo-type depolymerization) of polymer macromolecules [10], yielding mid- and short-chain polymers with heterogeneous molecular weight distributions in the intestine of mealworms. Taken together, these data indicated that the polymer chains of the ingested PS and PVC were effectively shortened and reduced after passage through the gut of mealworms, demonstrating the biodegradation of the microplastics.
+
+The molecular weights of the ingested PE microplastics also significantly changed after mealworm digestion (Fig. 1d-i). The \(M_{w}, M_{n}\), and \(M_{z}\) values of the recovered PE residue increased by \(30.77 \pm 2.30 \%, 22.68 \pm 3.14 \%\), and \(31.28 \pm 5.73 \%\), respectively, compared to those of the original PE microplastics (Table 1), revealing a limited-extent depolymerization pattern of the ingested PE polymers [28,56,59]. The limited-extent depolymerization pattern could be attributed to the functional enzymes and gut bacterial consortiums of mealworms reacting slowly on the long-chain PE polymers with high molecular weights but attacking the short-chain and side-chain PE polymers more efficiently, resulting in the accumulation of the long-chain portion and an increase in the \(M_{w}, M_{n}\), and \(M_{z}\) values. The difference in the depolymerization patterns of the polymers
+------------------------
+output:
+("entity"{tuple_delimiter}MEALWORM{tuple_delimiter}ORGANISM{tuple_delimiter}Mealworms are larvae that were fed various types of microplastics to study their effects on growth and survival)
+{record_delimiter}
+("entity"{tuple_delimiter}MICROPLASTICS{tuple_delimiter}MATERIAL{tuple_delimiter}Microplastics are small plastic particles used in the experiment to observe their impact on mealworms)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYETHYLENE (PE){tuple_delimiter}MATERIAL{tuple_delimiter}Polyethylene is a type of microplastic that was used as a diet for some mealworms in the study)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYSTYRENE (PS){tuple_delimiter}MATERIAL{tuple_delimiter}Polystyrene is a type of microplastic that was fed to mealworms to assess its effects on their growth and survival)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYVINYL CHLORIDE (PVC){tuple_delimiter}MATERIAL{tuple_delimiter}Polyvinyl chloride is a type of microplastic that caused poor survival rates in mealworms during the experiment)
+{record_delimiter}
+("entity"{tuple_delimiter}NUTRIENTS{tuple_delimiter}SUBSTANCE{tuple_delimiter}Nutrients are essential elements required for mealworms' growth and survival, which were found to be lacking in the plastic diet)
+{record_delimiter}
+("entity"{tuple_delimiter}DIGESTIVE ENZYMES{tuple_delimiter}SUBSTANCE{tuple_delimiter}Digestive enzymes are biological catalysts produced by mealworms that facilitate the breakdown of food)
+{record_delimiter}
+("entity"{tuple_delimiter}GPC ANALYSIS{tuple_delimiter}METHOD{tuple_delimiter}GPC analysis is a technique used to confirm the biodegradation of plastics by measuring molecular weight changes)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORM{tuple_delimiter}MICROPLASTICS{tuple_delimiter}Mealworms were fed various microplastics to study their effects on growth and survival{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORM{tuple_delimiter}POLYETHYLENE (PE){tuple_delimiter}Mealworms were specifically fed polyethylene microplastics to assess their growth and survival outcomes{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORM{tuple_delimiter}POLYSTYRENE (PS){tuple_delimiter}Mealworms were also fed polystyrene microplastics to evaluate their physiological responses{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORM{tuple_delimiter}POLYVINYL CHLORIDE (PVC){tuple_delimiter}Mealworms fed with PVC microplastics showed poor survival rates compared to those fed with PE and PS{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MICROPLASTICS{tuple_delimiter}NUTRIENTS{tuple_delimiter}The ingestion of microplastics led to nutrient exhaustion and lack of trace elements necessary for mealworms{tuple_delimiter}6)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORM{tuple_delimiter}DIGESTIVE ENZYMES{tuple_delimiter}Mealworms produce digestive enzymes that help in the breakdown of ingested materials, including plastics{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}GPC ANALYSIS{tuple_delimiter}POLYSTYRENE (PS){tuple_delimiter}GPC analysis was used to measure the depolymerization of polystyrene after ingestion by mealworms{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}GPC ANALYSIS{tuple_delimiter}POLYVINYL CHLORIDE (PVC){tuple_delimiter}GPC analysis was also used to confirm the depolymerization of PVC after mealworm digestion{tuple_delimiter}8)
+{completion_delimiter}
+#############################
+
+
+Example 5:
+
+text:
+# Chemosphere 287 (2022) 132063
+
+## Contents lists available at ScienceDirect
+
+## Chemosphere
+
+[Image of the journal cover]
+
+## Journal homepage: www.elsevier.com/locate/chemosphere
+
+---
+
+## Long-term effect of plastic feeding on growth and transcriptomic response of mealworms (Tenebrio molitor L.)
+
+### Zheng Zhong, Wenyan Nong, Yichun Xie, Jerome Ho Lam Hui, Lee Man Chu*
+
+**School of Life Sciences, The Chinese University of Hong Kong, Shatin, NT, Hong Kong SAR, China**
+
+---
+
+### Highlights
+
+- We studied effects of plastics on mealworm growth and its mechanism in PS and PE degradation by transcriptomic analysis.
+- Plastic consumption was negatively dependent on plastic crystallinity.
+- Fatty acid degradation pathway was important in the digestion of plastic degradation intermediates.
+- Depolymerases probably act on the distal backbone and produce shorter linear chains that containing ≤16 C atoms.
+- Intermediates of PS degradation were further decomposed by mealworms as xenobiotics.
+
+---
+
+### Graphical Abstract
+
+[Image of the graphical abstract]
+
+---
+
+### Abstract
+
+Plastic waste has been considered a serious global environmental problem for decades. Despite the high recalcitrance of synthetic plastics, the biodegradation of polyethylene (PE), polystyrene (PS), polypropylene (PP), and polyvinyl chloride (PVC) by some insect larvae has been reported; however, the mechanism of degradation remains largely unknown. We investigated the effects of plastics on the growth of mealworms (larvae of Tenebrio molitor) and their role in PS and PE degradation. Mealworms were capable of ingesting high-impact polystyrene (HIPS), expanded polystyrene (EPS) and low-density polyethylene (LDPE) but not linear low-density polyethylene (LLDPE) or polypropylene (PP). Plastic consumption was negatively dependent on plastic crystallinity. Transcriptome analysis and KEGG mapping revealed that mealworms act as downstream decomposers in plastic depolymerization and that fatty acid degradation pathways may play important roles in the digestion of plastic degradation intermediates produced by gut bacteria. In addition, PS and PE degradation was achieved via the diffusion of extracellular depolymerases, which probably acted on the distal backbone and produce shorter linear chains that containing ≤16 C atoms instead of branched chains. Additionally, the intermediates of PS degradation are expected to be further decomposed by mealworms as xenobiotics. This study provided a preliminary understanding of plastic degradation mechanism by mealworms.
+
+---
+
+### Article Info
+
+Handling Editor: Michael Bank
+
+**Keywords:** Polystyrene, Polyethylene, Plastic degradation, Biodegradative pathway, Transcriptomics, Fatty acid degradation pathway
+
+---
+
+*Corresponding author. E-mail address: leemanchu@cuhk.edu.hk (L.M. Chu).*
+
+[DOI: 10.1016/j.chemosphere.2021.132063]
+
+Received 6 July 2021; Received in revised form 22 August 2021; Accepted 26 August 2021
+
+Available online 27 August 2021
+
+0045-6535/© 2021 Elsevier Ltd. All rights reserved.
+
+1. Introduction
+
+Worldwide plastic production was reported to be 368 million tonnes in 2019 (PlasticsEurope, 2020), and 400 million tonnes of thermoplastics were produced globally in 2020 (Tieso, 2021a). The major non-hydrolysable plastics include polyethylene (PE), polypropylene (PP), polystyrene (PS), and polyvinyl chloride (PVC), based on their production worldwide in 2018 (Tieso, 2021b), i.e. PE, 32%; PP, 23%; PVC, 16% and PS, 7%. This enormous plastic production has imposed an immense burden in terms of waste management since polyolefins are largely nonbiodegradable.
+
+Degrading recalcitrant plastics using insects has become a trendy topic globally. Gerhardt and Lindgren (1954) reported the ability of 9 species of common stored-product insects (Tenebroides mauritianus, Tribolium confusum, Stegobium panicum, Blattella germanica, Sitophilus granarius, Plodia interpunctella, Rhysopertha dominica, Euphestia kuehniella and Sitophilus oryzae) to penetrate PE films. Holes and scratches in PP, PE and polyester films produced by adults of R. dominica and S. oryzae have been observed under scanning electron microscopy (Riudavets et al., 2007). Two bacterial strains, Enterobacter asburiae YT1 and Bacillus sp. YP1, isolated from waxworm gut, were shown to achieve PE film degradation rates of 6.1% and 10.7% in their suspension cultures (10^8 cells mL^-1), respectively (Yang et al., 2014).
+
+Mealworms (larvae of Tenebrio molitor) have been found to degrade expanded PS, PE, PP, PVC and polyactic acid (PLA) to lower-molecular-weight products, even CO2 (Brandon et al., 2018; Peng et al., 2020b, 2021; Yang et al., 2015, 2021a, 2021b). Degradation capabilities of expanded PS, PE, PP and rigid PS, PE, PVC by mealworm were evaluated by changes in number-, weight-, and size-average molecular weight (Mn, Mw
+------------------------
+output:
+("entity"{tuple_delimiter}MEALWORMS{tuple_delimiter}ORGANISM{tuple_delimiter}Mealworms (larvae of Tenebrio molitor) are insects studied for their ability to degrade various plastics, including polystyrene (PS) and polyethylene (PE).)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYSTYRENE{tuple_delimiter}PLASTIC{tuple_delimiter}Polystyrene (PS) is a type of plastic that mealworms can degrade and is a focus of the study on plastic waste.)
+{record_delimiter}
+("entity"{tuple_delimiter}POLYETHYLENE{tuple_delimiter}PLASTIC{tuple_delimiter}Polyethylene (PE) is another type of plastic that mealworms are capable of degrading.)
+{record_delimiter}
+("entity"{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}PROCESS{tuple_delimiter}Plastic degradation is the process by which mealworms break down synthetic plastics into lower-molecular-weight products.)
+{record_delimiter}
+("entity"{tuple_delimiter}TRANSCRIPTOMIC ANALYSIS{tuple_delimiter}METHOD{tuple_delimiter}Transcriptomic analysis is a method used in the study to understand the gene expression related to plastic degradation in mealworms.)
+{record_delimiter}
+("entity"{tuple_delimiter}SCHOOL OF LIFE SCIENCES{tuple_delimiter}INSTITUTION{tuple_delimiter}The School of Life Sciences at The Chinese University of Hong Kong is the institution where the research on mealworms and plastic degradation was conducted.)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORMS{tuple_delimiter}POLYSTYRENE{tuple_delimiter}Mealworms are capable of degrading polystyrene as part of their plastic consumption and degradation process.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORMS{tuple_delimiter}POLYETHYLENE{tuple_delimiter}Mealworms can degrade polyethylene, indicating their role in plastic waste management.{tuple_delimiter}8)
+{record_delimiter}
+("relationship"{tuple_delimiter}MEALWORMS{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}Mealworms are involved in the plastic degradation process by breaking down various plastics into smaller components.{tuple_delimiter}9)
+{record_delimiter}
+("relationship"{tuple_delimiter}TRANSCRIPTOMIC ANALYSIS{tuple_delimiter}PLASTIC DEGRADATION{tuple_delimiter}Transcriptomic analysis helps to understand the mechanisms of plastic degradation by mealworms.{tuple_delimiter}7)
+{record_delimiter}
+("relationship"{tuple_delimiter}SCHOOL OF LIFE SCIENCES{tuple_delimiter}MEALWORMS{tuple_delimiter}The research on mealworms and their plastic degradation capabilities was conducted at the School of Life Sciences.{tuple_delimiter}6)
+{completion_delimiter}
+#############################
+
+
+
+-Real Data-
+######################
+text: {input_text}
+######################
+output:

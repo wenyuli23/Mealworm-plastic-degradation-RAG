@@ -1,0 +1,4 @@
+*.env
+/rag_baseline/vectorstore/index.faiss
+/rag_baseline/vectorstore/index.pkl
+/rag_baseline/src/__pycache__/

@@ -1,0 +1,18 @@
+python-dotenv>=1.0.1
+langchain>=0.2.14
+langchain-community>=0.2.10
+langchain-openai>=0.2.0
+faiss-cpu>=1.8.0
+tiktoken>=0.7.0
+pandas>=2.2
+openpyxl>=3.1
+
+# For Qwen/Tongyi models via Alibaba Cloud
+dashscope>=1.14.0
+
+# For Llama models via Ollama (optional)
+langchain-ollama>=0.1.0
+
+# for Markdown loading via Unstructured:
+unstructured>=0.12.0
+unstructured[md]>=0.12.0
